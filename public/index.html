@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "appCtrl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dream House</title>
+    <!--Insert bower component -->
+    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/libs/angular-material/angular-material.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/home.css">
+    <link rel="stylesheet" href="stylesheets/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+</head>
+
+<body>
+
+<div ng-controller = "appController">  
+  <md-content>
+<!-- Toolbar -->
+      
+        <md-toolbar class="md-whiteframe-1dp md-primary md-hue-2">
+          <div class="md-toolbar-tools">
+            <md-button ui-sref="home">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i> Dream House 
+          </md-button>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="button" ng-click="openRightMenu()">
+                <md-icon md-font-set="material-icons"> menu </md-icon>
+            </md-button>
+          </div>
+        </md-toolbar> 
+
+<ui-view></ui-view>
+
+        <div layout="row" class="footer" layout-padding>
+            <div flex="70">
+                <h4> Dream House</h4>
+                <md-divider ></md-divider><br>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dignissim est vitae enim viverra, sit amet interdum risus convallis. Vestibulum sit amet laoreet nibh, eget lacinia nisi. Vestibulum nec volutpat sapien, faucibus feugiat neque. Proin sed dolor non leo auctor imperdiet at sit amet mauris.</p><br>
+
+                <h4> Follow us on social media</h4>
+                <md-divider ></md-divider>
+
+                <md-button class="md-icon-button">
+                  <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+                </md-button>
+                <md-button class="md-icon-button ">
+                  <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+                </md-button>
+                <md-button class="md-icon-button">
+                  <i class="fa fa-google-plus-square fa-lg" aria-hidden="true"></i>
+                </md-button>
+                <md-button class="md-icon-button">
+                  <i class="fa fa-tumblr-square fa-lg" aria-hidden="true"></i>
+                </md-button>
+
+                <br>
+                <p>IMSE4119 Digital enterprises and e-commerce</p>
+
+            </div>
+        </div>
+
+</md-content>
+
+<!--side nav-->
+  <md-sidenav md-component-id="right" class="md-sidenav-right">
+      <md-toolbar class="md-whiteframe-1dp md-primary md-hue-2">
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="button" ng-click="openRightMenu()">
+                <md-icon md-font-set="material-icons"> keyboard_arrow_left </md-icon>
+            </md-button>
+            <div flex></div>
+            <h2>Navigation</h2>
+          </div>
+        </md-toolbar> 
+
+        <md-list flex>
+        <md-subheader class="md-no-sticky">Basic function</md-subheader>
+        <md-divider ></md-divider>
+                <md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="login">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user" aria-hidden="true"></i> Login</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</h4>
+                  </div>
+                </md-list-item>
+
+        <md-subheader class="md-no-sticky">Project related</md-subheader>
+        <md-divider ></md-divider>
+                <md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-compass" aria-hidden="true"></i> Explore Project</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-wrench" aria-hidden="true"></i> Start a Project</h4>
+                  </div>
+                </md-list-item>
+        </md-list>
+
+  </md-sidenav>
+
+</div>
+
+
+    <!--Insert bower component -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="libs/angular-resource/angular-resource.min.js"></script>
+    <script src="/libs/angular-aria/angular-aria.js"></script>
+    <script src="/libs/angular-animate/angular-animate.js"></script>
+    <script src="/libs/angular-material/angular-material.js"></script>
+    <script src="/javascripts/appCtrl.js"></script>
+    <script src="/javascripts/appRoutes.js"></script>
+
+
+
+</body>
+</html>

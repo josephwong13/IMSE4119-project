@@ -1,0 +1,24 @@
+.jumbotron {
+    
+    background: linear-gradient(rgba(0, 77, 64, 0.55), rgba(0, 150, 136, 0.55)),
+                rgba(0,0,0,0.55) url(../images/background.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.large-button {
+    height: 12.8rem !important;
+    width: 12.8rem !important;
+}
+
+.large {
+    font-size: 800% !important;
+}
+
+.white {
+    color:white !important;
+}
+
+.footer {
+    background-color: #00695C;
+    color: #B2DFDB;
+}
