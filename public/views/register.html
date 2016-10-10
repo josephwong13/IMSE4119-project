@@ -1,0 +1,38 @@
+<div class="loginBg" ng-controller ="userController">
+
+    <div layout="row" layout-align="center center" layout-margin layout-padding>
+        <md-whiteframe class="md-whiteframe-3dp">
+
+          <form ng-submit="registerUser()" name="registerForm">
+            <h3><i class="fa fa-user" aria-hidden="true"></i> Register</h3>
+            <md-divider ></md-divider><br>
+
+            <md-input-container class="md-icon-float md-block">
+              <label>User Name</label>
+              <md-icon> account_circle </md-icon>
+              <input type="text" ng-model="reguser.username" name="name" ng-model-options="{ debounce: 100 }" required maxlength="15" unique-username>
+              <div ng-messages="registerForm.name.$error">
+                <div ng-message="required">Please fill in your username</div>
+                <div ng-message="maxlength">Maximum length is 15</div>
+                <ng-message when="unique" class="error">This username is taken</ng-message>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+              <label>Password</label>
+              <md-icon> lock_outline </md-icon>
+              <input type="password" ng-model="reguser.password" name="password" required>
+              <div ng-messages="registerForm.password.$error">
+                <div ng-message="required">Please fill in your password</div>
+              </div>
+            </md-input-container>
+
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="registerForm.$invalid">Register</md-button>
+            <md-button class="md-raised" ng-click="reset()">Reset</md-button>
+
+          </form>
+        </md-whiteframe>
+    </div>
+
+
+</div>

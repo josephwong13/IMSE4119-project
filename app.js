@@ -4,8 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
-var routes = require('./app/routes/index');
+
+//var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
 
 var app = express();
@@ -20,6 +24,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(passport.initialize());
+var User = require('./app/models/users');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+mongoose.connect('mongodb://localhost:27017/crowdfunding');
+
+//app.use('/', routes);
+app.use('/users', users);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/views', express.static(__dirname + '/public/views'));
 app.all('/*', function(req,res){
@@ -27,8 +42,7 @@ app.all('/*', function(req,res){
 });
 
 
-app.use('/', routes);
-app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

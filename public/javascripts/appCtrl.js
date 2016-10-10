@@ -1,4 +1,4 @@
-angular.module('appCtrl',['ngMaterial','ui.router','appRoutes'])
+angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','authenticate','userCtrl'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')

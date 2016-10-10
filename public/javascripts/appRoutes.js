@@ -16,6 +16,12 @@ angular.module('appRoutes', ['ui.router','ngResource'])
                         controller : ''
             })
 
+            .state('register', {
+                url:'/register',
+                        templateUrl : '../views/register.html',
+                        controller : ''
+            })
+
             $urlRouterProvider.otherwise("/home");
 
     }])

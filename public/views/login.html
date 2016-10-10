@@ -1,26 +1,35 @@
-<div class="loginBg">
+<div class="loginBg" ng-controller ="userController">
 
     <div layout="row" layout-align="center center" layout-margin layout-padding>
         <md-whiteframe class="md-whiteframe-3dp">
 
-          <form>
+          <form ng-submit="loginUser()" name="loginForm">
             <h3><i class="fa fa-user" aria-hidden="true"></i> Login</h3>
             <md-divider ></md-divider><br>
-
+            <p ng-show="failLogin" md-colors="{color:'warn'}">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+              Username or password is incorrect<br><br>
+            </p>
 
             <md-input-container class="md-icon-float md-block">
               <label>User Name</label>
               <md-icon> account_circle </md-icon>
-              <input type="text">
+              <input type="text" ng-model="user.username" name="username" required>
+              <div ng-messages="loginForm.username.$error">
+                <div ng-message="required">Please fill in your username</div>
+              </div>
             </md-input-container>
 
             <md-input-container class="md-icon-float md-block">
               <label>Password</label>
               <md-icon> lock_outline </md-icon>
-              <input type="password">
+              <input type="password" ng-model="user.password" name="password" required>
+              <div ng-messages="loginForm.password.$error">
+                <div ng-message="required">Please fill in your password</div>
+              </div>
             </md-input-container>
 
-            <md-button class="md-raised md-primary">Submit</md-button>
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="loginForm.$invalid">Login</md-button>
             <md-button class="md-raised ">Reset</md-button>
 
           </form>
