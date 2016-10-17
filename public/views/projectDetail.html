@@ -1,0 +1,26 @@
+<div layout="column" layout-padding>
+    <div>
+        <h1>{{project.name}}</h1>
+        <div class="hint">By {{project.owner_username}}</div>
+        <h3>Summary: {{project.summary}}</h3>
+    </div>
+
+    <div>
+        <h3>Project Description: </h3>
+        <md-divider></md-divider>
+    </div>
+    <div>
+        <h4>{{project.description}}</h4>
+    </div>
+
+    <h4>Deadline: {{project.endDate}}</h4>
+    <h4>Current fund: ${{project.currentFund}}</h4>
+    <h4>Goal: ${{project.goalFund}}</h4>
+
+    <div ng-repeat="n in project.reward">
+        <md-divider></md-divider>
+        <h4>Reward: {{n.name}}</h4>
+        <h4>Description: {{n.description}}<h4>
+        <h4>Minimum fund: ${{n.fund}}</h4>
+    </div>
+</div>

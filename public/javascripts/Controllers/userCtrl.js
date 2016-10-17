@@ -28,11 +28,6 @@ angular.module('userCtrl',[])
 
     $scope.loginUser = function(){
         Authentication.login($scope.user);
-        if(Authentication.login($scope.user)){
-            $scope.failLogin = true;
-        }
-        //$window.location.href = '/';
-        //$state.go("app.exhibits", {}, {reload: true});
     };
 
     $scope.logoutUser = function(){

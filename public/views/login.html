@@ -1,4 +1,4 @@
-<div class="loginBg" ng-controller ="userController">
+<div class="loginBg">
 
     <div layout="row" layout-align="center center" layout-margin layout-padding>
         <md-whiteframe class="md-whiteframe-3dp">
@@ -30,7 +30,7 @@
             </md-input-container>
 
             <md-button class="md-raised md-primary" type="submit" ng-disabled="loginForm.$invalid">Login</md-button>
-            <md-button class="md-raised ">Reset</md-button>
+            <md-button class="md-raised" ng-click="reset()">Reset</md-button>
 
           </form>
         </md-whiteframe>

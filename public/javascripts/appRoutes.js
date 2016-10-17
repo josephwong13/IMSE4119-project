@@ -7,19 +7,37 @@ angular.module('appRoutes', ['ui.router','ngResource'])
             .state('home', {
                 url:'/home',
                         templateUrl : '../views/home.html',
-                        controller : ''
+                        controller : 'appController'
             })
 
             .state('login', {
                 url:'/login',
                         templateUrl : '../views/login.html',
-                        controller : ''
+                        controller : 'userController'
             })
 
             .state('register', {
                 url:'/register',
                         templateUrl : '../views/register.html',
-                        controller : ''
+                        controller : 'userController'
+            })
+
+            .state('project', {
+                url:'/project',
+                        templateUrl : '../views/project.html',
+                        controller : 'projectController'
+            })
+
+            .state('createProject', {
+                url:'/createProject',
+                        templateUrl : '../views/createProject.html',
+                        controller : 'projectController'
+            })
+
+            .state('projectDetail',{
+                url: '/project/:id',
+                        templateUrl : 'views/projectDetail.html',
+                        controller  : 'projectDetailController', 
             })
 
             $urlRouterProvider.otherwise("/home");

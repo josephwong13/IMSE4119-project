@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 //var routes = require('./app/routes/index');
 var users = require('./app/routes/users');
+var projects = require('./app/routes/projects');
 
 var app = express();
 
@@ -34,6 +35,7 @@ mongoose.connect('mongodb://localhost:27017/crowdfunding');
 
 //app.use('/', routes);
 app.use('/users', users);
+app.use('/projects',projects);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/views', express.static(__dirname + '/public/views'));

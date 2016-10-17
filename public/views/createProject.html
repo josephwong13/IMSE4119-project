@@ -1,0 +1,78 @@
+<div layout="column" layout-align="center center" layout-padding>
+    <div>
+        <h1>Start a project</h1>
+    </div>
+    <div>
+        <h3>Share your idea with people around the world. Start making some real money</h3>
+    </div>
+
+    <div>
+        <h3>Create a project</h3>
+        <md-divider></md-divider><br>
+    </div>
+</div>
+
+        <form ng-submit="postProject()">
+            <md-input-container class="md-block">
+              <label>Project Name</label>
+              <input type="text" ng-model="project.name" name="projectName" required>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>Summary</label>
+              <input type="text" ng-model="project.summary" name="projectSummary" required>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>Description</label>
+              <textarea ng-model="project.description" md-maxlength="2000" rows="5" md-select-on-focus required></textarea>
+            </md-input-container>
+
+            <div layout="row" layout-padding>
+              <md-input-container>
+                <label>Deadline</label>
+                <md-datepicker ng-model="project.endDate"></md-datepicker>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Funding Goal</label>
+                <input type="number" ng-model="project.goalFund" name="projectGoal" required>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Location</label>
+                <input type="text" ng-model="project.location" name="projectLocation" required>
+              </md-input-container>
+            </div>
+
+
+            <div ng-repeat="n in rewardslist">
+              <div layout="column" layout-padding>
+              <h4>Reward</h4>
+              <md-input-container class="md-block">
+                <label>Name</label>
+                <input type="text" ng-model="n.name">
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Description</label>
+                <input type="text" ng-model="n.description">
+              </md-input-container>
+              <md-input-container class="md-block">
+                <label>Minimum fund</label>
+                <input type="number" ng-model="n.fund">
+              </md-input-container>
+                <md-checkbox ng-model="n.shipment" class="md-primary">
+                  Shipment required
+                </md-checkbox>
+              </div>
+            </div>
+            <md-button class="md-fab md-primary" ng-click="addReward()">
+            <md-icon class="material-icons">add</md-icon>
+            </md-button>
+
+            <md-button class="md-raised md-primary" type="submit">Create Project!</md-button>
+
+          </form>
+
+
+

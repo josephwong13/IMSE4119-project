@@ -20,6 +20,64 @@
 <body>
 
 <div ng-controller = "appController">  
+
+<!--side nav-->
+  <md-sidenav md-component-id="right" class="md-sidenav-right">
+      <md-toolbar class="md-whiteframe-1dp md-primary md-hue-2">
+          <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="button" ng-click="openRightMenu()">
+                <md-icon md-font-set="material-icons"> keyboard_arrow_left </md-icon>
+            </md-button>
+            <div flex></div>
+            <h2>Navigation</h2>
+          </div>
+        </md-toolbar> 
+
+        <md-list flex>
+        <md-subheader class="md-no-sticky">Basic function</md-subheader>
+        <md-divider ></md-divider>
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="register" ng-hide="status">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="login" ng-hide="status">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user" aria-hidden="true"></i> Login</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="logout(); openRightMenu()" ui-sref="home" ng-show="status">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user" aria-hidden="true"></i> Logout</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</h4>
+                  </div>
+                </md-list-item>
+
+        <md-subheader class="md-no-sticky">Project related</md-subheader>
+        <md-divider ></md-divider>
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="project">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-compass" aria-hidden="true"></i> Explore Project</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="createProject">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-wrench" aria-hidden="true"></i> Start a Project</h4>
+                  </div>
+                </md-list-item>
+        </md-list>
+
+  </md-sidenav>
+
+
   <md-content>
 <!-- Toolbar -->
       
@@ -68,55 +126,6 @@
 
 </md-content>
 
-<!--side nav-->
-  <md-sidenav md-component-id="right" class="md-sidenav-right">
-      <md-toolbar class="md-whiteframe-1dp md-primary md-hue-2">
-          <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="button" ng-click="openRightMenu()">
-                <md-icon md-font-set="material-icons"> keyboard_arrow_left </md-icon>
-            </md-button>
-            <div flex></div>
-            <h2>Navigation</h2>
-          </div>
-        </md-toolbar> 
-
-        <md-list flex>
-        <md-subheader class="md-no-sticky">Basic function</md-subheader>
-        <md-divider ></md-divider>
-                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="register">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h4>
-                  </div>
-                </md-list-item>
-
-                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="login">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-user" aria-hidden="true"></i> Login</h4>
-                  </div>
-                </md-list-item>
-
-                <md-list-item class="md-3-line" ng-click="null">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</h4>
-                  </div>
-                </md-list-item>
-
-        <md-subheader class="md-no-sticky">Project related</md-subheader>
-        <md-divider ></md-divider>
-                <md-list-item class="md-3-line" ng-click="null">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-compass" aria-hidden="true"></i> Explore Project</h4>
-                  </div>
-                </md-list-item>
-
-                <md-list-item class="md-3-line" ng-click="null">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-wrench" aria-hidden="true"></i> Start a Project</h4>
-                  </div>
-                </md-list-item>
-        </md-list>
-
-  </md-sidenav>
 
 </div>
 
@@ -133,7 +142,9 @@
     <script src="/javascripts/appRoutes.js"></script>
     <script src="/javascripts/Controllers/userCtrl.js"></script>
     <script src="/javascripts/Services/authenticate.js"></script>
-
+    <script src="/javascripts/Controllers/projectCtrl.js"></script>
+    <script src="/javascripts/Services/projectService.js"></script>
+    <script src="/javascripts/Controllers/projectDetailCtrl.js"></script>
 
 </body>
 </html>

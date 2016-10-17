@@ -4,18 +4,29 @@ angular.module('authenticate',[])
 
     var url = "http://localhost:3000/users";
 
-    function saveToken(token){
+    function saveToken(token, _id, username){
         $window.localStorage['mytoken'] = token;
         $window.localStorage['status'] = true;
+        $window.localStorage['_id'] = _id;
+        $window.localStorage['username'] = username;
     }
 
     function getToken(){
         return $window.localStorage['mytoken'];
     }
 
+    function getId(){
+        return $window.localStorage['_id'];
+    }
+
+    function getName(){
+        return $window.localStorage['username'];
+    }
+
     function logout(){
         $window.localStorage.removeItem('mytoken');
         $window.localStorage.removeItem('status');
+        $window.localStorage.removeItem('_id');
         $window.location.href = '/';
     }
 
@@ -32,15 +43,15 @@ angular.module('authenticate',[])
     }
 
     function login(user){
-        return $http.post(url + '/login', user).then(
+        $http.post(url + '/login', user).then(
             function(data){
                 console.log("successfully login");
-                saveToken(data.data.token);
+                saveToken(data.data.token, data.data._id, data.data.username);
                 $window.location.href = '/';
             },
             function(err){
                 console.log('Fail to login user');
-                return true;
+                $window.alert('Username or password incorrect');
             })
     }
 
@@ -55,7 +66,9 @@ angular.module('authenticate',[])
         saveToken: saveToken,
         getToken: getToken,
         logout: logout,
-        getStatus: getStatus
+        getStatus: getStatus,
+        getId: getId,
+        getName: getName
     }
 }])
 

@@ -4,8 +4,10 @@ var passport = require('passport');
 var User = require('../models/users');
 var jwtVerify = require('../jwtVerify');
 
+
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/',jwtVerify.verifyUser,jwtVerify.verifyAdmin,function(req, res, next) {
     User.find(function(err,user){
         if(err) return next(err);
         res.json(user);
@@ -32,8 +34,20 @@ router.get('/username/:username',function(req,res,next){
     })
 })
 
+//put user
+router.put('/:user_id',jwtVerify.verifyUser,jwtVerify.verifyAdmin,function(req,res,next){
+    User.findByIdAndUpdate(req.params.user_id,req.body ,function(err,user){
+        if(err) return next(err);
+        if(user == null){
+            res.json({message: 'No user found'});
+            return next(err);
+        }
+        res.json({message:"Update successful"});
+    })
+})
+
 //delete user
-router.delete('/:user_id', function(req,res,next){
+router.delete('/:user_id', jwtVerify.verifyUser,jwtVerify.verifyAdmin,function(req,res,next){
     User.findByIdAndRemove(req.params.user_id, function(err){
         if(err) return next(err);
         res.json({message:'deleted user'});
@@ -72,7 +86,9 @@ router.post('/login', function(req,res){
             res.status(200).json({
                 status: 'Login successful',
                 success: true,
-                token: token
+                token: token,
+                _id: user._id,
+                username: user.username
             });
         });
     })(req,res);   
