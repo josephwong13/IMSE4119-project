@@ -4,11 +4,12 @@ angular.module('authenticate',[])
 
     var url = "http://localhost:3000/users";
 
-    function saveToken(token, _id, username){
+    function saveToken(token, _id, username,admin){
         $window.localStorage['mytoken'] = token;
         $window.localStorage['status'] = true;
         $window.localStorage['_id'] = _id;
         $window.localStorage['username'] = username;
+        $window.localStorage['admin'] = admin;
     }
 
     function getToken(){
@@ -23,10 +24,19 @@ angular.module('authenticate',[])
         return $window.localStorage['username'];
     }
 
+    function getAdmin(){
+        if($window.localStorage['admin'] == "false" || $window.localStorage['admin'] == null){
+            return false;
+        }
+        return true;
+    }
+
     function logout(){
         $window.localStorage.removeItem('mytoken');
         $window.localStorage.removeItem('status');
         $window.localStorage.removeItem('_id');
+        $window.localStorage.removeItem('username');
+        $window.localStorage.removeItem('admin');
         $window.location.href = '/';
     }
 
@@ -46,7 +56,7 @@ angular.module('authenticate',[])
         $http.post(url + '/login', user).then(
             function(data){
                 console.log("successfully login");
-                saveToken(data.data.token, data.data._id, data.data.username);
+                saveToken(data.data.token, data.data._id, data.data.username,data.data.admin);
                 $window.location.href = '/';
             },
             function(err){
@@ -68,7 +78,8 @@ angular.module('authenticate',[])
         logout: logout,
         getStatus: getStatus,
         getId: getId,
-        getName: getName
+        getName: getName,
+        getAdmin: getAdmin
     }
 }])
 

@@ -1,0 +1,42 @@
+<div layout="column" layout-align="center center" layout-padding>
+    <div>
+        <h1>Manage Project</h1>
+    </div>
+    <div>
+        <h3>Approve or delete project(s)</h3>
+    </div>
+</div>
+
+<div layout="column" layout-padding>
+    <ul style="list-style: none;">
+    <md-subheader class="md-no-sticky">Project</md-subheader>
+    
+        <li ng-repeat="n in allProjects">
+            <div layout="column" layout-padding>
+                    <md-divider></md-divider>
+                    <h4>{{n.name}} </h4>
+                    <span class="hint">By {{n.owner_username}}</span>
+                    <p> <span class="md-subhead">Summary: </span>{{n.summary}}</p>
+                    <p>{{n.description}}</p>
+                    <div layout="row">
+                        <span flex><span class="md-subhead">Start: </span>{{n.startDate}}</span>
+                        <span flex><span class="md-subhead">End: </span>{{n.endDate}} </span>
+                        <span flex><span class="md-subhead">Location: </span>{{n.location}}</span>
+                        <span flex><span class="md-subhead">Goal Fund: </span>{{n.goalFund}}</span>
+                    </div>
+                    <div layout="row" layout-padding>       
+                        <md-button class="md-primary md-raised" ng-click="updateProject(n,n._id,true)" ng-hide="n.approve">
+                            Approve
+                        </md-button>
+                        <md-button class="md-accent md-raised" ng-click="updateProject(n,n._id,false)" ng-show="n.approve">
+                            Disapprove
+                        </md-button>
+                        <md-button class="md-warn md-raised" ng-click="deleteProject(n._id)">
+                            Delete
+                        </md-button>
+                    </div>
+            </div>
+        </li>
+    </ul>
+</div>
+

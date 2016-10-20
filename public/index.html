@@ -34,6 +34,21 @@
         </md-toolbar> 
 
         <md-list flex>
+
+        <md-subheader class="md-no-sticky" ng-show="admin">Admin function</md-subheader>
+        <md-divider ng-show="admin"></md-divider>
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="manageUser" ng-show="admin">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-users" aria-hidden="true"></i> Manage User</h4>
+                  </div>
+                </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="manageProject" ng-show="admin">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-check-square-o" aria-hidden="true"></i> Manage Project</h4>
+                  </div>
+                </md-list-item>
+       
         <md-subheader class="md-no-sticky">Basic function</md-subheader>
         <md-divider ></md-divider>
                 <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="register" ng-hide="status">
@@ -145,6 +160,7 @@
     <script src="/javascripts/Controllers/projectCtrl.js"></script>
     <script src="/javascripts/Services/projectService.js"></script>
     <script src="/javascripts/Controllers/projectDetailCtrl.js"></script>
+    <script src="/javascripts/Services/userService.js"></script>
 
 </body>
 </html>

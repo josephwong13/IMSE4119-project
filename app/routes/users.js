@@ -88,7 +88,8 @@ router.post('/login', function(req,res){
                 success: true,
                 token: token,
                 _id: user._id,
-                username: user.username
+                username: user.username,
+                admin: user.admin
             });
         });
     })(req,res);   

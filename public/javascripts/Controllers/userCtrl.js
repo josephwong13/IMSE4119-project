@@ -1,6 +1,33 @@
 angular.module('userCtrl',[])
 
-.controller('userController', ['$scope','Authentication','$state','$window','$http', function($scope,Authentication,$state,$window,$http){
+.controller('userController', ['$scope','Authentication','$state','$window','$http', 'User', function($scope,Authentication,$state,$window,$http,User){
+
+    //get method
+    $scope.allUser = User.query(function(){
+        console.log('get users successfully');
+    });
+
+    //put method
+    $scope.updateUser = function(user,userid){
+        User.update({id:userid},user,
+        function(){
+            console.log("Update successful");
+        },
+        function(){
+            console.log("Update fail due to unexpected error");
+        })
+    };
+
+    //delete method
+    $scope.deleteUser = function(userid){
+        User.delete({id:userid},
+        function(){
+            console.log("Delete user successful");
+        }),
+        function(){
+            console.log("Delete fail due to unexpected error");
+        }
+    }
 
     //get login status
     $scope.status = Authentication.getStatus();
@@ -11,8 +38,6 @@ angular.module('userCtrl',[])
         username: "",
         password: ""
     };
-
-    $scope.allUser = [];
 
     $scope.registerUser = function(){
         Authentication.register($scope.reguser);

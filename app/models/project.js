@@ -5,6 +5,8 @@ var ProjectSchema = new Schema({
     name: String,
     description: String,
     summary: String,
+    picture: String,
+    category: String,
     owner_id: String,
     owner_username: String,
     location: String,
@@ -13,7 +15,9 @@ var ProjectSchema = new Schema({
     startDate: Date,
     endDate: Date,
     backer: [{username:String}],
-    reward: [{name:String,fund:Number,description:String,shipment:Boolean}]
+    reward: [{name:String,fund:Number,description:String,shipment:Boolean}],
+    approve: {type:Boolean,default: false},
+    comment: [{username:String,content:String}]
 });
 
 module.exports = mongoose.model('Project',ProjectSchema);

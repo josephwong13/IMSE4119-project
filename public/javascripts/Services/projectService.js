@@ -14,6 +14,18 @@ angular.module('projectService',[])
         delete: {
             method: 'DELETE',
             headers: { 'x-access-token': Authentication.getToken() }
+        },
+        approve: {
+            url: "http://localhost:3000/projects/:id/admin",
+            method: 'PUT',
+            headers: { 'x-access-token': Authentication.getToken() }
+        },
+        support: {
+            url: "http://localhost:3000/projects/:id/backer",
+            method: 'PUT',
+            headers: { 'x-access-token': Authentication.getToken() ,
+                        'user-id': Authentication.getId()
+                     }
         }
     });
 }])

@@ -8,7 +8,7 @@
 </div>
 
 <div layout="row" layout-wrap layout-align="space-around start">
-  <div ng-repeat="n in allProjects">
+  <div ng-repeat="n in allProjects" ng-show="n.approve">
       <div flex="33">
         <md-card style="width: 350px;">           
         <md-toolbar>
@@ -17,9 +17,10 @@
             </div>
           </md-toolbar>
           <a ui-sref="projectDetail({id: n._id})">
-            <img ng-src="http://www.bajiroo.com/wp-content/uploads/2013/03/funny-cute-cat-cats-in-box-animals-pics-lol-cats-photos-bajiroo-fun-images-2.jpg" class="md-card-image" height="200" width="350">
+            <img ng-src="{{n.picture}}" class="md-card-image" height="200" width="350">
           </a>
          <md-card-title>
+
            <md-card-title-text>
              <span class="md-headline">{{n.name}}</span>
              <div class="hint">By {{n.owner_username}}</div>
@@ -27,19 +28,14 @@
           </md-card-title>
           <md-card-content>
            <p>{{n.summary}}</p>
+           <md-divider></md-divider>
          </md-card-content>
-         <md-card-footer>
-         <div layout="row">
-          <div flex>
-           <md-progress-circular md-mode="determinate" value="{{progress}}" class="md-warn"></md-progress-circular>
-           <h4>{{progress}}% Funded</h4>
-         </div>
-         <div flex>
-            <h4>Goal:</h4>
-            <h3>${{n.goalFund}}</h3>
-         </div>
-          </div>
-         </md-card-footer>
+           <md-card-footer>
+             <p class="hint"><i class="fa fa-map-marker" aria-hidden="true"></i> Location: {{n.location}}</p> 
+             <p class="hint"><i class="fa fa-clock-o" aria-hidden="true"></i> Deadline: {{convertDate(n.endDate)}} (yyyy-mm-dd)</p>
+              <md-progress-linear md-mode="determinate" value="{{(n.currentFund/n.goalFund)*100}}"></md-progress-linear>
+              <p class="hint"><i class="fa fa-flag-checkered" aria-hidden="true"></i> Progress: ${{n.currentFund}} out of ${{n.goalFund}}</p>
+           </md-card-footer>
         </md-card>
     </div>
   </div>

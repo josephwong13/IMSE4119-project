@@ -1,9 +1,9 @@
-angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl'])
+angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl','userService'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
-    .accentPalette('deep-orange')
+    .accentPalette('deep-purple')
     .warnPalette('red');
     //.backgroundPalette('blue-grey');
 })
@@ -14,10 +14,10 @@ angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','aut
 
   $scope.openRightMenu = function() {
     $mdSidenav('right').toggle();
-    $scope.Menuopen = !$scope.Menuopen;
   };
 
   $scope.status = Authentication.getStatus();
+  $scope.admin = Authentication.getAdmin();
 
   $scope.logout = Authentication.logout;
 

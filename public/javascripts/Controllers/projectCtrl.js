@@ -8,16 +8,33 @@ angular.module('projectCtrl',[])
         console.log('get projects successfully');
     })
 
+    //put method
+    $scope.updateProject = function(project,projectid,bool){
+        project.approve = bool;
+        Project.approve({id:projectid},project,
+        function(){
+            console.log("Update successful");
+        },
+        function(){
+            console.log("Update fail due to unexpected error");
+        })
+    };
+
+
     //post method
     $scope.project = {
         name: "",
         description: "",
         summary: "",
+        category: "",
         goalFund: "",
         startDate: "",
         endDate: "",
-        location: ""
+        location: "",
+        picture: ""
     };
+
+    $scope.category = ["Technology","Design","Community","Food","Game","Other"]
 
     //{name:String,fund:Number,description:String,shipment:Boolean}
 
@@ -26,7 +43,9 @@ angular.module('projectCtrl',[])
         return d;
     }
 
-
+    $scope.convertDate = function(d){
+        return d.slice(0,10);
+    }
 
     $scope.rewardslist = [{
         name: "",
@@ -54,13 +73,15 @@ angular.module('projectCtrl',[])
         newProject = {"name": $scope.project.name,
                       "description":$scope.project.description,
                       "summary": $scope.project.summary,
+                      "category": $scope.project.category,
                       "owner_id": Authentication.getId(),
                       "owner_username": Authentication.getName(),
                       "location": $scope.project.location,
                       "goalFund": $scope.project.goalFund,
                       "startDate": getStartDate(),
                       "endDate": $scope.project.endDate,
-                      "reward": $scope.rewardslist
+                      "reward": $scope.rewardslist,
+                      "picture": $scope.picture
                     };
         Project.save(newProject,function(){
             console.log('successfully post project');
@@ -68,10 +89,10 @@ angular.module('projectCtrl',[])
                 name: "",
                 description: ""
             };
-            window.alert("Project created! Please check in the explore page");
+            window.alert("Project created! It will take 2-3 working days to approve your project.");
             //$state.go($state.current, {}, {reload: true});
         }, function(){
-            console.log('fail to post project');
+            console.log('fail to create project. Please try again later.');
             window.alert("Please login to create project");
         });        
     }
@@ -82,18 +103,16 @@ angular.module('projectCtrl',[])
             description: ""
         }
     }
-/*
-    //delete method on exhibit
+
+    //delete method on project
     $scope.deleteProject = function(id){
         Project.delete({id:id},
             function(){
             console.log('successfully delete project');
-            $state.go($state.current, {}, {reload: true});
         })
     }
-    */
+
     //General
 
-    $scope.progress = 70;
 
 }])

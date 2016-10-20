@@ -40,6 +40,18 @@ angular.module('appRoutes', ['ui.router','ngResource'])
                         controller  : 'projectDetailController', 
             })
 
+            .state('manageUser',{
+                url: '/manageUser',
+                        templateUrl : 'views/manageUser.html',
+                        controller  : 'userController', 
+            })
+
+            .state('manageProject',{
+                url: '/manageProject',
+                        templateUrl : 'views/manageProject.html',
+                        controller  : 'projectController', 
+            })
+
             $urlRouterProvider.otherwise("/home");
 
     }])
