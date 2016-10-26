@@ -1,4 +1,4 @@
-angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl','userService'])
+angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','base64','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl','userService','paypalCtrl','paypalAuthen'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')

@@ -17,17 +17,22 @@ angular.module('projectDetailCtrl',[])
     $scope.minSupport = 0;
     $scope.support = null;
     $scope.selected = false;
+    $scope.myreward = null;
 
-    $scope.choose = function(n){
+    $scope.choose = function(n,name){
         $scope.showDonate = true;
         $scope.minSupport = n;
         $scope.selected = true;
+        $scope.myreward = name;
+
     }
 
     $scope.cancel = function(){
         $scope.showDonate = false;
         $scope.minSupport = 0;
         $scope.selected = false;
+        $scope.myreward = null;
+
     }
     //put a single project
     $scope.putProject = function(){
@@ -42,7 +47,7 @@ angular.module('projectDetailCtrl',[])
     $scope.backProject = function(){    
 
     $scope.supportProject = {
-        backer: $scope.project.backer.concat([{username:Authentication.getName()}]),
+        backer: $scope.project.backer.concat([{username:Authentication.getName(),rewardname:$scope.myreward,donate:$scope.support}]),
         currentFund: $scope.project.currentFund + $scope.support,
         comment: $scope.project.comment
     };

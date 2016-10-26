@@ -33,12 +33,13 @@
           </md-card-title>
           <md-card-content>
             <span><i class="fa fa-gift" aria-hidden="true"></i> {{n.description}}</span><br>
-            <md-button class="md-raised md-primary" ng-click="choose(n.fund)" ng-disabled="selected">Choose</md-button>
+            <md-button class="md-raised md-primary" ng-click="choose(n.fund,n.name)" ng-disabled="selected">Choose</md-button>
           </md-card-content>
         </md-card>
       </div>
 </div>
     
+   <div ng-controller="paypalController"> 
     <form name="supportForm" ng-submit="backProject()">
         <div layout="column" layout-padding ng-show="showDonate">
             <h4>You have choosed the ${{minSupport}} support!</h4>
@@ -52,7 +53,10 @@
                     </div>
                 </md-input-container>
                 <md-button class="md-raised md-primary" type="submit" ng-disabled="supportForm.$invalid">Confirm</md-button>
-                <md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>            
+                <md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>    
+                <md-button class="md-raised md-warn" ng-click="preapproval()">Preapproval</md-button>
+                <md-button class="md-raised md-warn" ng-click="payment()">Payment</md-button>           
               </div>
         </div>
     </form>
+  </div>

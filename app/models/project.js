@@ -14,7 +14,7 @@ var ProjectSchema = new Schema({
     currentFund: {type:Number, default: 0},
     startDate: Date,
     endDate: Date,
-    backer: [{username:String}],
+    backer: [{username:String, rewardname:String, donate:Number, donateToOwner:Number, donateToSystem:Number, preapproval: String}],
     reward: [{name:String,fund:Number,description:String,shipment:Boolean}],
     approve: {type:Boolean,default: false},
     comment: [{username:String,content:String}]
