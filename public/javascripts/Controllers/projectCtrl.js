@@ -2,7 +2,6 @@ angular.module('projectCtrl',[])
 
 .controller('projectController', ['$scope','Project','$state','Authentication', function($scope,Project,$state,Authentication){
 
-    
     //get method
     $scope.allProjects = Project.query(function(){
         console.log('get projects successfully');
@@ -109,6 +108,7 @@ angular.module('projectCtrl',[])
         Project.delete({id:id},
             function(){
             console.log('successfully delete project');
+            window.alert("Project deleted! (Please refresh to see the effect)");
         })
     }
 

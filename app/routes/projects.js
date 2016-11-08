@@ -109,4 +109,19 @@ router.route('/:project_id/backer')
     })
 })
 
+router.route('/:project_id/comment')
+//backer put
+.put(jwtVerify.verifyUser,
+
+    function(req,res,next){
+    Project.findByIdAndUpdate(req.params.project_id, {comment:req.body.comment}, function(err,project){
+        if(err)return next(err);
+        if(project == null) {
+           res.json({message: 'No project found!'});
+           return next(err);
+        }
+        res.json({message:'successfully comment project'});
+    })
+})
+
 module.exports = router;

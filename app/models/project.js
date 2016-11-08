@@ -17,7 +17,9 @@ var ProjectSchema = new Schema({
     backer: [{username:String, rewardname:String, donate:Number, donateToOwner:Number, donateToSystem:Number, preapproval: String}],
     reward: [{name:String,fund:Number,description:String,shipment:Boolean}],
     approve: {type:Boolean,default: false},
-    comment: [{username:String,content:String}]
+    comment: [{username:String,content:String,date:Date,userpic:String}],
+    update:[{date:Date,title:String,content:String,picture:String}],
+    status: {type:String, default: "In progress"}
 });
 
 module.exports = mongoose.model('Project',ProjectSchema);

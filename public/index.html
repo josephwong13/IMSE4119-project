@@ -59,19 +59,25 @@
 
                 <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="login" ng-hide="status">
                   <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-user" aria-hidden="true"></i> Login</h4>
+                    <h4><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h4>
                   </div>
                 </md-list-item>
+
+                <md-list-item class="md-3-line" ng-click="openRightMenu()" ui-sref="userProfile({id:user_id})" ng-show="status">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-user" aria-hidden="true"></i> User Profile</h4>
+                  </div>
+                </md-list-item>
+
+                <!--<md-list-item class="md-3-line" ng-click="null">
+                  <div class="md-list-item-text" layout="column">
+                    <h4><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</h4>
+                  </div>
+                </md-list-item>-->
 
                 <md-list-item class="md-3-line" ng-click="logout(); openRightMenu()" ui-sref="home" ng-show="status">
                   <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-user" aria-hidden="true"></i> Logout</h4>
-                  </div>
-                </md-list-item>
-
-                <md-list-item class="md-3-line" ng-click="null">
-                  <div class="md-list-item-text" layout="column">
-                    <h4><i class="fa fa-info-circle" aria-hidden="true"></i> About Us</h4>
+                    <h4><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</h4>
                   </div>
                 </md-list-item>
 
@@ -164,6 +170,7 @@
     <script src="/javascripts/Services/userService.js"></script>
     <script src="/javascripts/Controllers/paypalCtrl.js"></script>
     <script src="/javascripts/Services/paypalAuthen.js"></script>
+    <script src="/javascripts/Controllers/userProfileCtrl.js"></script>
     <!--<script src="/javascripts/Services/paypalService.js"></script>-->
 
 </body>

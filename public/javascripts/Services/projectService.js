@@ -5,7 +5,8 @@ angular.module('projectService',[])
     return $resource(url,{ id: '@_id' },{
         update: {
             method: 'PUT',
-            headers: { 'x-access-token': Authentication.getToken() }
+            headers: { 'x-access-token': Authentication.getToken(),
+                        'user-id': Authentication.getId() }
         },
         save: {
             method: 'POST',
@@ -26,6 +27,11 @@ angular.module('projectService',[])
             headers: { 'x-access-token': Authentication.getToken() ,
                         'user-id': Authentication.getId()
                      }
-        }
+        },
+        comment: {
+            url: "http://localhost:3000/projects/:id/comment",
+            method: 'PUT',
+            headers: { 'x-access-token': Authentication.getToken()}
+        },
     });
 }])

@@ -20,6 +20,12 @@ angular.module('userService',[])
         delete: {
             method: 'DELETE',
             headers: { 'x-access-token': Authentication.getToken() }
+        },
+        userupdate: {
+            url: "http://localhost:3000/users/userupdate/:id",
+            method: 'PUT',
+            headers: { 'x-access-token': Authentication.getToken(),
+                        'user-id': Authentication.getId()}
         }
     });
 }])

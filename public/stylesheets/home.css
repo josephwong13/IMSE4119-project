@@ -1,4 +1,4 @@
-.jumbotron {
+.homeTitle {
     
     background: linear-gradient(rgba(0, 77, 64, 0.55), rgba(0, 150, 136, 0.55)),
                 rgba(0,0,0,0.55) url(../images/background.jpg) no-repeat center;
@@ -14,12 +14,44 @@
     font-size: 800% !important;
 }
 
+.medium {
+    font-size: 500% !important;
+}
+
 .white {
     color:white !important;
+}
+
+.grey{
+    color: #212121!important;
 }
 
 .footer {
     background-color: #00695C;
     color: #B2DFDB;
 }
+
+/*For user profile page */
+
+.userTitle {
+    background: linear-gradient(135deg, #00695C, #FFCDD2);
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.projectTitle {
+    background: linear-gradient(135deg, #00695C, #E1BEE7);
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.createprojectTitle {
+    background: linear-gradient(135deg, #00695C, #BBDEFB);
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 

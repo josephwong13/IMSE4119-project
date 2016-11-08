@@ -1,12 +1,25 @@
 angular.module('projectDetailCtrl',[])
 
-.controller('projectDetailController', ['$scope','Project','$state','$stateParams','Authentication', function($scope,Project,$state,$stateParams,Authentication){
+.controller('projectDetailController', ['$scope','Project','User','$state','$stateParams','Authentication','$location', '$anchorScroll','$window', function($scope,Project,User,$state,$stateParams,Authentication,$location, $anchorScroll,$window){
 
     //get login status
     $scope.status = !Authentication.getStatus();
 
+    $scope.myPic = Authentication.getPic();
+
     //get a single project
-    $scope.project = Project.get({id:$stateParams.id});
+    $scope.project = Project.get({id:$stateParams.id},
+        function(data){
+            $scope.owner = User.get({id:data.owner_id},
+                function(){
+                    console.log("Get owner successfully")
+                })
+    });
+
+    //verify id
+    $scope.isOwner = function(){
+        return Authentication.getId()==$scope.project.owner_id;
+    }
 
     $scope.convertDate = function(d){
         return d.slice(0,10);
@@ -34,15 +47,60 @@ angular.module('projectDetailCtrl',[])
         $scope.myreward = null;
 
     }
+
+
+    getStartDate = function(){
+        d = new Date();
+        return d;
+    }
+
+    $scope.update = {
+        date:getStartDate(),
+        title:"",
+        content:"",
+        picture:""
+    }
     //put a single project
-    $scope.putProject = function(){
-        Project.update({id:$stateParams.id}, $scope.project, function(){
+    $scope.updateProject = function(){
+        var newupdate = {update: $scope.project.update.concat([$scope.update])};
+        Project.update({id:$stateParams.id}, newupdate, function(){
             console.log("Successfully updated");
-            alert('successfully updated project : ' + $scope.project.name);
+            $window.alert('successfully updated project : ' + $scope.project.name);
         });
     }
 
+    $scope.comment = {
+        username:Authentication.getName(),
+        userpic:Authentication.getPic(),
+        content: "",
+        date: getStartDate()
+    }
 
+    $scope.postComment = function(){
+        var update = {
+            backer:$scope.project.backer,
+            currentFund:$scope.project.currentFund,
+            comment:$scope.project.comment.concat([$scope.comment])
+        };
+        Project.comment({id:$stateParams.id},update,
+        function(){
+            console.log("Successfully comment")
+            $window.alert("Comment successful. Please refresh to see your comment")
+        },
+        function(){
+            console.log("comment fail")
+            $window.alert("Comment fail. Please login and try again")
+        })
+    }
+
+    $scope.toBackup = function() {
+      $location.hash('backup');
+      $anchorScroll();
+    };
+
+
+
+/*
     //put a single project as a backer
     $scope.backProject = function(){    
 

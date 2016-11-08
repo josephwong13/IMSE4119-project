@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 var User = new Schema({
     username: String,
     password: String,
-    admin: {type:Boolean,default:false}
+    profilepic: {type:String,default:"https://www.kirkleescollege.ac.uk/wp-content/uploads/2015/09/default-avatar.png"},
+    admin: {type:Boolean,default:false},
+    paypal: String,
+    mysupportproject: [String]
 });
 
 User.plugin(passportLocalMongoose);

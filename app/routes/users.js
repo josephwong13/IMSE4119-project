@@ -46,6 +46,31 @@ router.put('/:user_id',jwtVerify.verifyUser,jwtVerify.verifyAdmin,function(req,r
     })
 })
 
+//put user for user
+router.put('/userupdate/:user_id',jwtVerify.verifyUser,
+
+//verify owner
+    function(req,res,next){
+        User.findById(req.params.user_id, function(err,user){
+            if(err)return next(err);
+            if(req.headers['user-id'] != user._id){
+                return res.status(401).json({message:"Not owner"});
+            }
+            next();
+        })
+    },
+
+    function(req,res,next){
+    User.findByIdAndUpdate(req.params.user_id,req.body ,function(err,user){
+        if(err) return next(err);
+        if(user == null){
+            res.json({message: 'No user found'});
+            return next(err);
+        }
+        res.json({message:"Update successful"});
+    })
+})
+
 //delete user
 router.delete('/:user_id', jwtVerify.verifyUser,jwtVerify.verifyAdmin,function(req,res,next){
     User.findByIdAndRemove(req.params.user_id, function(err){
@@ -89,7 +114,8 @@ router.post('/login', function(req,res){
                 token: token,
                 _id: user._id,
                 username: user.username,
-                admin: user.admin
+                admin: user.admin,
+                pic: user.profilepic
             });
         });
     })(req,res);   

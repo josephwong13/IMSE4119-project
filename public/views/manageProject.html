@@ -7,21 +7,21 @@
     </div>
 </div>
 
-<div layout="column" layout-padding>
+<div layout="column" layout-padding ng-controller="paypalController">
     <ul style="list-style: none;">
     <md-subheader class="md-no-sticky">Project</md-subheader>
     
         <li ng-repeat="n in allProjects">
             <div layout="column" layout-padding>
                     <md-divider></md-divider>
-                    <h4>{{n.name}} </h4>
+                    <h4><a ui-sref="projectDetail({id: n._id})">{{n.name}} </a></h4>
                     <span class="hint">By {{n.owner_username}}</span>
                     <p> <span class="md-subhead">Summary: </span>{{n.summary}}</p>
                     <p>{{n.description}}</p>
                     <div layout="row">
                         <span flex><span class="md-subhead">Start: </span>{{n.startDate}}</span>
                         <span flex><span class="md-subhead">End: </span>{{n.endDate}} </span>
-                        <span flex><span class="md-subhead">Location: </span>{{n.location}}</span>
+                        <span flex><span class="md-subhead">Current Fund: </span>{{n.currentFund}}</span>
                         <span flex><span class="md-subhead">Goal Fund: </span>{{n.goalFund}}</span>
                     </div>
                     <div layout="row" layout-padding>       
@@ -33,6 +33,10 @@
                         </md-button>
                         <md-button class="md-warn md-raised" ng-click="deleteProject(n._id)">
                             Delete
+                        </md-button>
+                        <div flex></div>
+                        <md-button class="md-raised md-primary" ng-click="approvePayment(n)" ng-disabled="{{n.currentFund<=n.goalFund}}">
+                            Payment
                         </md-button>
                     </div>
             </div>

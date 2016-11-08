@@ -1,0 +1,63 @@
+<div class="jumbotron userTitle">
+    <div layout="column" layout-align="center start" layout-padding>
+            <h1 class="medium">User profile</h1>
+            <p>This is your user profile, you can update your information and view your project(s) here</p>
+    </div>
+</div>
+
+<div layout="row" layout-align="start center" layout-padding>
+    <div layout = "column">
+        <h4>{{myuser.username}}</h4>
+        <img ng-src="{{myuser.profilepic}}" class="md-avatar" height="200px" width="200px"/>
+    </div>
+    <div layout="column">
+        <h4 class="md-subhead">Paypal: </h4>   
+            <form name="paypal">         
+            <md-input-container>
+                <input ng-model="myuser.paypal" type="email" name="account">
+                <div ng-messages="paypal.account.$error">
+                    <div ng-message="email">Please enter a valid email</div>
+              </div>
+            </md-input-container>
+            </form>
+        
+        <h4 class="md-subhead">
+            Profile Picture: 
+        </h4>
+            <md-input-container>
+                <input ng-model="myuser.profilepic" type="text">
+            </md-input-container>
+
+        <md-button class="md-raised md-primary" ng-click="update()" ng-disabled="paypal.$invalid">Update</md-button>        
+    </div>
+</div>
+
+<div ng-controller="projectController">
+    <md-tabs md-dynamic-height="true">
+        <md-tab label="My project">
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="n in allProjects" ng-show="n.owner_username==myuser.username" ng-click="" ui-sref="projectDetail({id: n._id})">
+              <img ng-src="{{n.picture}}" class="md-avatar"/>
+                <div class="md-list-item-text">
+                        <h3>{{n.name}}</h3>
+                        <p>{{n.summary}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+        </md-tab>
+        <md-tab label="Support project"><!--ng-show = "['admin', 'user', 'buyer'].indexOf(role)!=-1"-->
+            <md-list>
+              <md-list-item class="md-2-line" ng-repeat="n in allProjects" 
+              ng-show="checkList(n._id)" 
+              ng-click="" ui-sref="projectDetail({id: n._id})">
+              <img ng-src="{{n.picture}}" class="md-avatar"/>
+                <div class="md-list-item-text">
+                        <h3>{{n.name}}</h3>
+                        <p>{{n.summary}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+        </md-tab>
+    </md-tabs>
+</div>
+

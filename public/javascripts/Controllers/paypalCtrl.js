@@ -1,6 +1,6 @@
 angular.module('paypalCtrl',[])
 
-.controller('paypalController', ['$scope','PaypalAuthen','$http','$window','$timeout','$stateParams','Project','Authentication', function($scope,PaypalAuthen,$http,$window,$timeout,$stateParams,Project,Authentication){
+.controller('paypalController', ['$scope','PaypalAuthen','$http','$window','$timeout','$stateParams','Project','Authentication','User', function($scope,PaypalAuthen,$http,$window,$timeout,$stateParams,Project,Authentication,User){
 
 
     getStartDate = function(){
@@ -8,7 +8,23 @@ angular.module('paypalCtrl',[])
         return d;
     }
 
+    getEndDate = function(){
+        t = new Date();
+        t.setDate(t.getDate() + 364);
+        return t;
+    }
+
+    $scope.myuser = User.get({id:Authentication.getId()}, function(){
+        console.log("Get user successful");
+    });
+
+
     $scope.preapproval = function(){
+
+        if(Authentication.getId() == undefined){
+          window.alert("Please login to backup project");
+          return "";
+        }
 
         if(Authentication.getId() == $scope.project.owner_id){
           window.alert("You can't back your own project!");
@@ -31,14 +47,14 @@ angular.module('paypalCtrl',[])
             "X-PAYPAL-RESPONSE-DATA-FORMAT":"JSON"
             },
             data: {              
-              "returnUrl":"http://www.example.com/success.html",
-              "cancelUrl":"http://www.example.com/failure.html",  
+              "returnUrl":"http://localhost:3000/#/home",
+              "cancelUrl":"http://localhost:3000/#/home",  
               "requestEnvelope":{
                   "errorLanguage":"en_US",                          
                   "detailLevel":"ReturnAll"                        
               },
               "startingDate": getStartDate(),
-              "endingDate": "2017-06-25T14:36:38.007+00:00",
+              "endingDate": getEndDate(),
               "maxTotalAmountOfAllPayments": 2000,
               "maxNumberOfPayments": 20,
               "currencyCode": "USD"
@@ -64,7 +80,14 @@ angular.module('paypalCtrl',[])
                 function(){
                     console.log("Back up project successful");
                     //console.log("Second");
-                    $window.location.href = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=" + data.data.preapprovalKey;
+                    User.userupdate({id:Authentication.getId()},{
+                      mysupportproject: $scope.myuser.mysupportproject.concat([$stateParams.id])
+                    }, function(){
+                      console.log("Updated user profile");
+                      $window.location.href = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=" + data.data.preapprovalKey;
+                    },function(){
+                      console.log("Fail updating user due to unexpected error");
+                    })
                 },
                 function(){
                     console.log("Fail due to unexpected error");
@@ -118,8 +141,8 @@ angular.module('paypalCtrl',[])
                     }
                   ]
                 },
-              "returnUrl":"http://www.example.com/success.html",
-              "cancelUrl":"http://www.example.com/failure.html",  
+              "returnUrl":"http://localhost:3000/#/home",
+              "cancelUrl":"http://localhost:3000/#/home",  
               "requestEnvelope":{
               "errorLanguage":"en_US"                        
               },
@@ -138,19 +161,72 @@ angular.module('paypalCtrl',[])
     }
 
 
-    /*$scope.redirect = function(){
-    var url = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=" + preapproval();
-    console.log(preapproval());
-    /*$timeout(function () {
-        $window.location.href = url;
-    }, 5000)
-    }*/
+    $scope.approvePayment = function(project){
+
+      var iteration = project.backer.length;
+        for(var i=0;i<iteration;i++){
+          if(project.backer[i].preapproval == undefined){
+           continue;
+         }
+        var paymentUrl = "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay";
+        $http({
+            method: "POST",
+            url: paymentUrl,
+            headers: {
+            "Authorization":"Bearer "+PaypalAuthen.getPaypalToken(),
+            "Coneten-Type":"application/json",
+            "X-PAYPAL-SECURITY-USERID":"adminfortest2_api2.gmail.com",
+            "X-PAYPAL-SECURITY-PASSWORD":"QC5VPMVMXCEHGF8Q",
+            "X-PAYPAL-SECURITY-SIGNATURE":"AFcWxV21C7fd0v3bYYYRCpSSRl31AZ1-uPEogsPXrJPoQfgoFGub15S1",
+            "X-PAYPAL-REQUEST-DATA-FORMAT": "NV",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT":"NV",
+            "X-PAYPAL-APPLICATION-ID":"APP-80W284485P519543T",
+            "X-PAYPAL-REQUEST-DATA-FORMAT":"JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT":"JSON"
+            },
+            data: {
+              "actionType":"PAY",
+              "preapprovalKey":project.backer[i].preapproval,
+              "feesPayer": "EACHRECEIVER",
+                "receiverList":{
+                  "receiver":[
+                    {
+                      "amount":project.backer[i].donateToSystem,
+                      "email":"adminfortest2@gmail.com"
+                    },
+                    {
+                      "amount":project.backer[i].donateToOwner,
+                      "email":"dummyfortest@gmail.com"
+                    }
+                  ]
+                },
+              "returnUrl":"http://localhost:3000/#/home",
+              "cancelUrl":"http://localhost:3000/#/home",  
+              "requestEnvelope":{
+              "errorLanguage":"en_US"                        
+              },
+              "currencyCode": "USD"
+              
+            }
+        }).then(
+        function(data){
+          console.log("Successfully created payment");
+          console.log(JSON.stringify(data));
+            Project.approve({id:project._id},{"status":"completed"},
+            function(){
+                console.log("Project completed");
+            },
+            function(){
+                console.log("Unexpected error");
+            })
+        },
+        function(){
+          console.log("Fil to created payment due to unexpected error.")
+        });
+        }
+    }
 
 
-
-    //$scope.getPaypalToken = function(){
-    //   console.log(PaypalAuthen.getPaypalToken());
-    //}
 
 
 

@@ -1,9 +1,9 @@
-angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','base64','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl','userService','paypalCtrl','paypalAuthen'])
+angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','base64','authenticate','userCtrl','projectService','projectCtrl','projectDetailCtrl','userService','paypalCtrl','paypalAuthen','userProfileCtrl'])
 
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
-    .accentPalette('deep-purple')
+    .accentPalette('amber')
     .warnPalette('red');
     //.backgroundPalette('blue-grey');
 })
@@ -18,6 +18,7 @@ angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','bas
 
   $scope.status = Authentication.getStatus();
   $scope.admin = Authentication.getAdmin();
+  $scope.user_id = Authentication.getId();
 
   $scope.logout = Authentication.logout;
 

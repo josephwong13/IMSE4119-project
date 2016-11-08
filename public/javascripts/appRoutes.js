@@ -52,6 +52,12 @@ angular.module('appRoutes', ['ui.router','ngResource'])
                         controller  : 'projectController', 
             })
 
+            .state('userProfile',{
+                url: '/userProfile/:id',
+                        templateUrl : 'views/userProfile.html',
+                        controller  : 'userProfileController', 
+            })
+
             $urlRouterProvider.otherwise("/home");
 
     }])

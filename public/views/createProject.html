@@ -1,11 +1,12 @@
-<div layout="column" layout-align="center center" layout-padding>
-    <div>
-        <h1>Start a project</h1>
+<div class="jumbotron createprojectTitle">
+    <div layout="column" layout-align="center start" layout-padding>
+            <h1 class="medium">Start a project</h1>
+            <p>Share your idea with people around the world. Gain support and make your dream come true</p>
     </div>
-    <div>
-        <h3>Share your idea with people around the world. Gain support and make your dream come true</h3>
-    </div>
+</div>
 
+
+<div layout="column" layout-align="center center" layout-padding>
     <div>
         <h3>Create a project</h3>
         <md-divider></md-divider><br>
@@ -14,74 +15,94 @@
 
   <div layout="column" layout-padding>
         <form ng-submit="postProject()" name="createProject">
+          <h4 class="md-subhead">Project Title: </h4>
             <md-input-container class="md-block">
-              <label>Project Title (Tell us the name of your project)</label>
+              <label>(Tell us the name of your project)</label>
               <input type="text" ng-model="project.name" name="projectName" required md-maxlength="50">
                 <div ng-messages="createProject.projectName.$error">
                   <div ng-message="required">This is required</div>
               </div>
             </md-input-container>
 
-          <div layout="row">
+          
+        <div layout="row" layout-xs="column">
 
-            <md-input-container class="md-block" flex>
-              <label>Summary (What is this project in brief?)</label>
-              <input type="text" ng-model="project.summary" name="projectSummary" required md-maxlength="200">
-                <div ng-messages="createProject.projectSummary.$error">
-                  <div ng-message="required">This is required</div>
-              </div>
-            </md-input-container>
+          <div flex>
+            <h4 class="md-subhead">Project Summary: </h4>
+              <md-input-container class="md-block">
+                <label>(What is this project in brief?)</label>
+                <input type="text" ng-model="project.summary" name="projectSummary" required md-maxlength="200">
+                  <div ng-messages="createProject.projectSummary.$error">
+                    <div ng-message="required">This is required</div>
+                </div>
+              </md-input-container>
+            </div>
 
-            <md-input-container class="md-block" flex>
-              <label>Picture (Give your project an eye-catching picture)</label>
-              <input type="text" ng-model="project.picture" name="projectPicture" required>
-                <div ng-messages="createProject.projectPicture.$error">
-                  <div ng-message="required">This is required</div>
-              </div>
-            </md-input-container>
-            
-            <md-input-container flex>
-              <label>Category (What type of project is this?)</label>
-              <md-select ng-model="project.category">
-                <md-option ng-value="opt" ng-repeat="opt in category">{{ opt }}</md-option>
-              </md-select>
-            </md-input-container>
-
-
+          <div flex>
+            <h4 class="md-subhead">Picture: </h4>
+              <md-input-container class="md-block">
+                <label>(Give your project an eye-catching picture)</label>
+                <input type="text" ng-model="project.picture" name="projectPicture" required>
+                  <div ng-messages="createProject.projectPicture.$error">
+                    <div ng-message="required">This is required</div>
+                </div>
+              </md-input-container>
           </div>
 
+          <div flex>
+            <h4 class="md-subhead">Category: </h4>
+              <md-input-container>
+                <label>(What type of project is this?)</label>
+                <md-select ng-model="project.category">
+                  <md-option ng-value="opt" ng-repeat="opt in category">{{ opt }}</md-option>
+                </md-select>
+              </md-input-container>
+          </div>
+        </div>
+
+          <h4 class="md-subhead">Description: </h4>
             <md-input-container class="md-block">
-              <label>Description (Tell us more about the project)</label>
+              <label>(Tell us more about the project)</label>
               <textarea ng-model="project.description" name="projectDes" md-maxlength="2000" rows="5" md-select-on-focus required></textarea>
                 <div ng-messages="createProject.projectDes.$error">
                   <div ng-message="required">This is required</div>
               </div>
             </md-input-container>
 
-            <div layout="row">
-              <md-input-container flex>
-                <label>Deadline (Recommend 3 months)</label>
-                <md-datepicker ng-model="project.endDate" name="projectEndDate"></md-datepicker>
-                <div ng-messages="createProject.projectEndDate.$error">
-                    <div ng-message="required">This is required</div>
-                </div>
-              </md-input-container>
+            <div layout="row" layout-xs="column">
 
-              <md-input-container class="md-block" flex>
-                <label>Funding Goal (How much you need for the project?)</label>
-                <input type="number" ng-model="project.goalFund" name="projectGoal" required>
-                <div ng-messages="createProject.projectGoal.$error">
-                    <div ng-message="required">This is required</div>
-                </div>
-              </md-input-container>
+              <div flex>
+                <h4 class="md-subhead">Deadline: </h4>
+                <md-input-container flex>
+                  <label>(Recommend 3 months)</label>
+                  <md-datepicker ng-model="project.endDate" name="projectEndDate"></md-datepicker>
+                  <div ng-messages="createProject.projectEndDate.$error">
+                      <div ng-message="required">This is required</div>
+                  </div>
+                </md-input-container>
+              </div>
 
-              <md-input-container class="md-block" flex>
-                <label>Location (Where are you launching?)</label>
-                <input type="text" ng-model="project.location" name="projectLocation" required>
-                <div ng-messages="createProject.projectLocation.$error">
-                    <div ng-message="required">This is required</div>
-                </div>
-              </md-input-container>
+              <div flex>
+                <h4 class="md-subhead">Funding Goal: </h4>
+                <md-input-container class="md-block" flex>
+                  <label>(How much you need for the project?)</label>
+                  <input type="number" ng-model="project.goalFund" name="projectGoal" required>
+                  <div ng-messages="createProject.projectGoal.$error">
+                      <div ng-message="required">This is required</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <div flex>
+                <h4 class="md-subhead">Location: </h4>
+                <md-input-container class="md-block" flex>
+                  <label>(Where are you launching?)</label>
+                  <input type="text" ng-model="project.location" name="projectLocation" required>
+                  <div ng-messages="createProject.projectLocation.$error">
+                      <div ng-message="required">This is required</div>
+                  </div>
+                </md-input-container>
+              </div>
     </div>
 
   <div layout="row" layout-padding layout-wrap>

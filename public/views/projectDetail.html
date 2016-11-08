@@ -1,24 +1,44 @@
-<div layout="column" layout-padding>
+<div layout="column" layout-padding layout-align="center center">
     <div>
         <h1>{{project.name}}</h1>
-        <div class="hint">By {{project.owner_username}}</div>
-        <h4>Summary: {{project.summary}}</h4>
+        <md-list-item>
+          <img ng-src="{{owner.profilepic}}" class="md-avatar"/>
+          <h4>By {{owner.username}}</h4>
+        </md-list-item>
     </div>
+</div>
+    <md-tabs md-dynamic-height="true" md-border-bottom md-swipe-content>
+    <md-tab label="Project detail">
 
-    <div>
-        <h4>Project Description: </h4>
-        <md-divider></md-divider>
-    </div>
-    <div>
+
+
+    <div layout="column" layout-padding layout-gt-md="row">
+      <img ng-src="{{project.picture}}" height="500" width="800"/>
+      <div layout="column" layout-padding>
+        <h1>{{project.summary}}</h1>
         <p>{{project.description}}</p>
+        <h2><strong>${{project.currentFund}}</strong> out of ${{project.goalFund}}</h2>
+        <md-progress-linear md-mode="determinate" value="{{(project.currentFund/project.goalFund)*100}}"></md-progress-linear>
+        <md-button class="md-raised md-primary" ng-click="toBackup()">Back this up!</md-button>
+      </div>
     </div>
-    <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Category: {{project.category}}</p>
-    <p><i class="fa fa-map-marker" aria-hidden="true"></i> Location: {{project.location}}</p>
-    <p><i class="fa fa-clock-o" aria-hidden="true"></i> Deadline: {{convertDate(project.endDate)}} (yyyy-mm-dd)</p>
-    <p><i class="fa fa-flag" aria-hidden="true"></i> Current fund: ${{project.currentFund}}</p>
-    <p><i class="fa fa-flag-checkered" aria-hidden="true"></i> Goal: ${{project.goalFund}}</p>
 
-  <div layout="row" layout-padding layout-wrap>
+    <div layout="row" layout-padding>
+    <h4><i class="fa fa-user" aria-hidden="true"></i> Backers: {{project.backer.length}}</h4>
+    <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Category: {{project.category}}</h4>
+    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Location: {{project.location}}</h4>
+    <h4><i class="fa fa-clock-o" aria-hidden="true"></i> Deadline: {{convertDate(project.endDate)}} (yyyy-mm-dd)</h4>
+  </div>
+
+
+  <md-divider></md-divider>
+  <div layout="column" layout-padding id="backup">
+    <h2>Support the project<br>
+    <small>Select the desired reward and donate!</small>
+    </h2>
+  </div>
+
+  <div layout="row" layout-padding layout-wrap >
       <div ng-repeat="n in project.reward">
         <md-card style="width: 350px;">
             <md-toolbar class="md-primary">
@@ -40,7 +60,7 @@
 </div>
     
    <div ng-controller="paypalController"> 
-    <form name="supportForm" ng-submit="backProject()">
+    <form name="supportForm" ng-submit="preapproval()">
         <div layout="column" layout-padding ng-show="showDonate">
             <h4>You have choosed the ${{minSupport}} support!</h4>
             <div layout="row">
@@ -54,9 +74,83 @@
                 </md-input-container>
                 <md-button class="md-raised md-primary" type="submit" ng-disabled="supportForm.$invalid">Confirm</md-button>
                 <md-button class="md-raised md-warn" ng-click="cancel()">Cancel</md-button>    
-                <md-button class="md-raised md-warn" ng-click="preapproval()">Preapproval</md-button>
-                <md-button class="md-raised md-warn" ng-click="payment()">Payment</md-button>           
+                <!--<md-button class="md-raised md-warn" ng-click="payment()">Payment</md-button>-->           
               </div>
         </div>
     </form>
-  </div>
+  </md-tab>
+  <md-tab label="Discussion">
+
+    <div lauout="row" layout-padding>
+        <md-list-item>
+          <img ng-src="{{myPic}}" class="md-avatar"/>
+          <form name="commentForm">
+          <md-input-container>
+              <textarea ng-model="comment.content" md-maxlength="200" rows="1" md-select-on-focus required></textarea>
+            </md-input-container>
+            <md-button class="md-primary" ng-click="postComment()" ng-disabled="commentForm.$invalid">Post</md-button>
+          </form>
+        </md-list-item>
+    </div>
+    
+    <div layout="column" layout-padding>
+      <h4 class="md-subhead">Comment Thread </h4>
+      <md-divider></md-divider>
+    </div>
+
+    <md-list ng-repeat="c in project.comment | orderBy: '-date'">
+      <md-list-item>
+          <img ng-src="{{c.userpic}}" class="md-avatar"/>
+            <div class="md-list-item-text" layout="column">
+              <h4>{{c.content}}</h4>
+              <small>{{c.username}}, posted on {{convertDate(c.date)}}</small>
+            </div>
+      </md-list-item>
+    </md-list>
+
+  </md-tab>
+  <md-tab label="Owner Update">
+
+    <form name="updateForm" ng-show="isOwner()">
+      <div layout="column" layout-padding>
+        <h4 class="md-subhead">Update Title: </h4>
+          <md-input-container class="md-block">
+            <label>Tell us the title of your update</label>
+            <input type="text" ng-model="update.title" name="updateTitle" required md-maxlength="50">
+              <div ng-messages="updateForm.updateTitle.$error">
+                <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+        <h4 class="md-subhead">Update Content: </h4>
+          <md-input-container class="md-block">
+            <label>Tell us your update content</label>
+            <textarea ng-model="update.content" name="updateContent" md-maxlength="3000" rows="5" md-select-on-focus required></textarea>
+              <div ng-messages="updateForm.updateContent.$error">
+                <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+        <h4 class="md-subhead">Picture: </h4>
+          <md-input-container class="md-block">
+            <label>Any picture to show progress</label>
+            <input type="text" ng-model="update.picture" name="updatePic">
+          </md-input-container>
+      </div>
+      <md-button class="md-primary" ng-click="updateProject()" ng-disabled="updateForm.$invalid">Post Update</md-button>
+    </form>    
+
+    <div layout="column" layout-padding>
+      <h4 class="md-subhead">Updates </h4>
+      <md-divider></md-divider>    
+
+      <div ng-repeat="u in project.update | orderBy: '-date'" >
+        <h4><strong>{{convertDate(u.date)}}</strong></h4>
+        <h2>{{u.title}} </h2>
+        <img ng-src="{{u.picture}}" height="400" width="600"/>
+        
+        <p>{{u.content}}</p>
+        <md-divider></md-divider>
+      </div>
+    </div>
+
+  </md-tab>
+  </md-tabs>
