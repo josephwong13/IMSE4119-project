@@ -31,7 +31,7 @@
             <h4 class="md-subhead">Project Summary: </h4>
               <md-input-container class="md-block">
                 <label>(What is this project in brief?)</label>
-                <input type="text" ng-model="project.summary" name="projectSummary" required md-maxlength="200">
+                <input type="text" ng-model="project.summary" name="projectSummary" required md-maxlength="300">
                   <div ng-messages="createProject.projectSummary.$error">
                     <div ng-message="required">This is required</div>
                 </div>
@@ -63,7 +63,7 @@
           <h4 class="md-subhead">Description: </h4>
             <md-input-container class="md-block">
               <label>(Tell us more about the project)</label>
-              <textarea ng-model="project.description" name="projectDes" md-maxlength="2000" rows="5" md-select-on-focus required></textarea>
+              <textarea ng-model="project.description" name="projectDes" md-maxlength="5000" rows="5" md-select-on-focus required></textarea>
                 <div ng-messages="createProject.projectDes.$error">
                   <div ng-message="required">This is required</div>
               </div>

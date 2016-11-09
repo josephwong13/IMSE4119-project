@@ -6,9 +6,16 @@
     </div>
 </div>
 
+<div layout="row" layout-padding>
+  <md-input-container class="md-icon-float md-block">
+    <md-icon class="material-icon">search</md-icon>
+    <input type="text" ng-model="search">
+  </md-input-container>
+</div>
+
 
 <div layout="row" layout-wrap layout-align="space-around start">
-  <div ng-repeat="n in allProjects" ng-show="n.approve">
+  <div ng-repeat="n in allProjects | filter:search" ng-show="n.approve" >
       <div flex="33">
         <md-card style="width: 350px;">           
         <md-toolbar>

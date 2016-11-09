@@ -80,7 +80,7 @@ angular.module('projectCtrl',[])
                       "startDate": getStartDate(),
                       "endDate": $scope.project.endDate,
                       "reward": $scope.rewardslist,
-                      "picture": $scope.picture
+                      "picture": $scope.project.picture
                     };
         Project.save(newProject,function(){
             console.log('successfully post project');
@@ -113,6 +113,6 @@ angular.module('projectCtrl',[])
     }
 
     //General
-
+    $scope.search = "";
 
 }])

@@ -86,6 +86,7 @@
           <img ng-src="{{myPic}}" class="md-avatar"/>
           <form name="commentForm">
           <md-input-container>
+            <label>Leave a comment</label>
               <textarea ng-model="comment.content" md-maxlength="200" rows="1" md-select-on-focus required></textarea>
             </md-input-container>
             <md-button class="md-primary" ng-click="postComment()" ng-disabled="commentForm.$invalid">Post</md-button>
@@ -96,7 +97,12 @@
     <div layout="column" layout-padding>
       <h4 class="md-subhead">Comment Thread </h4>
       <md-divider></md-divider>
+
+      <div ng-hide="haveComment()">
+        <h4>There are no comment yet :( </h4>
+      </div>
     </div>
+
 
     <md-list ng-repeat="c in project.comment | orderBy: '-date'">
       <md-list-item>
@@ -140,12 +146,15 @@
 
     <div layout="column" layout-padding>
       <h4 class="md-subhead">Updates </h4>
-      <md-divider></md-divider>    
 
+      <md-divider></md-divider>    
+      <div ng-hide="haveUpdate()">
+        <h4>There are no update yet :( </h4>
+      </div>
       <div ng-repeat="u in project.update | orderBy: '-date'" >
         <h4><strong>{{convertDate(u.date)}}</strong></h4>
         <h2>{{u.title}} </h2>
-        <img ng-src="{{u.picture}}" height="400" width="600"/>
+        <img ng-src="{{u.picture}}" height="400" width="600" ng-show="u.picture"/>
         
         <p>{{u.content}}</p>
         <md-divider></md-divider>

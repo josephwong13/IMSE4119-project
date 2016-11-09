@@ -15,8 +15,6 @@ var users = require('./app/routes/users');
 var projects = require('./app/routes/projects');
 
 
-
-
 var app = express();
 
 app.use(cors());

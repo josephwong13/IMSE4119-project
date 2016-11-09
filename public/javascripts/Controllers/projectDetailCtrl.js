@@ -98,7 +98,19 @@ angular.module('projectDetailCtrl',[])
       $anchorScroll();
     };
 
+    $scope.haveComment = function(){
+        if($scope.project.comment.length == 0){
+            return false
+        }
+        return true
+    };
 
+    $scope.haveUpdate = function(){
+        if($scope.project.update.length == 0){
+            return false
+        }
+        return true
+    };
 
 /*
     //put a single project as a backer

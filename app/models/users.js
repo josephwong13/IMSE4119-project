@@ -11,6 +11,7 @@ var User = new Schema({
     mysupportproject: [String]
 });
 
+
 User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);
