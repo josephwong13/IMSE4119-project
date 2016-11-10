@@ -112,3 +112,4 @@ angular.module('authenticate',[])
     return deferred.promise;
   }
 });
+*/
