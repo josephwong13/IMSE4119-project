@@ -42,7 +42,10 @@ var User = require('./app/models/users');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-mongoose.connect('mongodb://localhost:27017/crowdfunding');
+var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj";
+//var url = 'mongodb://localhost:27017/crowdfunding';
+mongoose.connect(url);
+
 
 //app.use('/', routes);
 app.use('/users', users);
