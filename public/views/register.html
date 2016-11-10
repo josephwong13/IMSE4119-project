@@ -27,6 +27,16 @@
               </div>
             </md-input-container>
 
+            <md-input-container class="md-icon-float md-block">
+              <label>Email</label>
+              <md-icon> email </md-icon>
+              <input type="email" ng-model="reguser.email" name="email" required>
+              <div ng-messages="registerForm.email.$error">
+                <div ng-message="required">Please fill in your email</div>
+                <div ng-message="email">Your email is invalid</div>
+              </div>
+            </md-input-container>
+
             <md-button class="md-raised md-primary" type="submit" ng-disabled="registerForm.$invalid">Register</md-button>
             <md-button class="md-raised" ng-click="reset()">Reset</md-button>
 

@@ -50,6 +50,11 @@ angular.module('authenticate',[])
     function register(user){
         $http.post(url + '/register', user).then(
             function(data){
+                console.log(JSON.stringify(data));
+                if(data.data.name=="UserExistsError"){
+                    $window.alert("Username taken,please try another one");
+                    return;
+                }
                 console.log('successfully register');
                 $window.location.href = '/';
                 $window.alert("Registration successful. Please login to use more function");

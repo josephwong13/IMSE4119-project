@@ -1,10 +1,9 @@
 angular.module('projectService',[])
 
-.factory('Project',['$resource','Authentication', function($resource,Authentication){"https://imse4119project.herokuapp.com"
+.factory('Project',['$resource','Authentication', function($resource,Authentication){
     var baseurl = "https://imse4119project.herokuapp.com";
     //var baseurl = "http://localhost:3000";
 
-    //var url = baseurl + "/prjects/:id";
     var url = baseurl + "/projects/:id";
 
     return $resource(url,{ id: '@_id' },{

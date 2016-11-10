@@ -5,32 +5,46 @@
     </div>
 </div>
 
-<div layout="row" layout-align="start center" layout-padding>
-    <div layout = "column">
-        <h4>{{myuser.username}}</h4>
-        <img ng-src="{{myuser.profilepic}}" class="md-avatar" height="200px" width="200px"/>
+<form name="paypal" ng-submit="update()"> 
+<div layout="column" layout-padding>
+    <div layout="row" layout-padding layout-align="start end">
+        <div layout="column" layout-padding>
+            <h3>{{myuser.username}}</h3>
+            <img ng-src="{{myuser.profilepic}}" class="md-avatar" height="200px" width="200px"/>
+        </div>
+        <div layout="column" layout-padding>
+            <h4 class="md-subhead">
+                Profile Picture: 
+            </h4>
+            <md-input-container>
+                <input ng-model="myuser.profilepic" type="text">
+            </md-input-container>
+        </div>
     </div>
-    <div layout="column">
+    <div layout="row" layout-padding>
+        <h4 class="md-subhead">
+            Email: 
+        </h4>
+        <md-input-container>
+            <input ng-model="myuser.email" type="email" name="myemail">
+            <div ng-messages="paypal.myemail.$error">
+                <div ng-message="email">Please enter a valid email</div>
+          </div>
+        </md-input-container>
+    </div>
+    <div layout="row" layout-padding>
         <h4 class="md-subhead">Paypal: </h4>   
-            <form name="paypal">         
+                   
             <md-input-container>
                 <input ng-model="myuser.paypal" type="email" name="account">
                 <div ng-messages="paypal.account.$error">
                     <div ng-message="email">Please enter a valid email</div>
               </div>
             </md-input-container>
-            </form>
-        
-        <h4 class="md-subhead">
-            Profile Picture: 
-        </h4>
-            <md-input-container>
-                <input ng-model="myuser.profilepic" type="text">
-            </md-input-container>
-
-        <md-button class="md-raised md-primary" ng-click="update()" ng-disabled="paypal.$invalid">Update</md-button>        
+        <md-button class="md-raised md-primary" type="submit" ng-disabled="paypal.$invalid">Update</md-button>   
     </div>
 </div>
+</form>
 
 <div ng-controller="projectController">
     <md-tabs md-dynamic-height="true">

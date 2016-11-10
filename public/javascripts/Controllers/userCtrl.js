@@ -36,7 +36,8 @@ angular.module('userCtrl',[])
     //register user
     $scope.reguser = {
         username: "",
-        password: ""
+        password: "",
+        email: ""
     };
 
     $scope.registerUser = function(){

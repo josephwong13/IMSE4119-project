@@ -58,6 +58,18 @@ angular.module('appRoutes', ['ui.router','ngResource'])
                         controller  : 'userProfileController', 
             })
 
+            .state('confirm',{
+                url: '/confirm',
+                        templateUrl : 'views/confirm.html',
+                        controller  : 'paypalController', 
+            })
+
+            .state('reject',{
+                url: '/reject',
+                        templateUrl : 'views/reject.html',
+                        controller  : 'paypalController', 
+            })
+
             $urlRouterProvider.otherwise("/home");
 
     }])

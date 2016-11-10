@@ -9,7 +9,7 @@ angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','bas
 })
 
 
-.controller('appController',['$scope','$mdSidenav', 'Authentication', function($scope, $mdSidenav, Authentication) {
+.controller('appController',['$scope','$mdSidenav', 'Authentication','$anchorScroll','$location', function($scope, $mdSidenav, Authentication,$anchorScroll,$location) {
   
 
   $scope.openRightMenu = function() {
@@ -21,5 +21,11 @@ angular.module('appCtrl',['ngMaterial','ui.router','ngMessages','appRoutes','bas
   $scope.user_id = Authentication.getId();
 
   $scope.logout = Authentication.logout;
+
+  $scope.toAbout = function() {
+      $location.hash('about');
+      $anchorScroll();
+  };
+
 
 }]);

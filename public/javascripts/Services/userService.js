@@ -6,7 +6,6 @@ angular.module('userService',[])
     //var baseurl = "http://localhost:3000";
 
     var url = baseurl + "/users/:id";
-    //var url = baseurl + "/users/:id";
 
     return $resource(url,{ id: '@_id' },{
         query: {
@@ -28,7 +27,7 @@ angular.module('userService',[])
             headers: { 'x-access-token': Authentication.getToken() }
         },
         userupdate: {
-            url: baseurl + "/userupdate/:id",
+            url: baseurl + "/users/userupdate/:id",
             method: 'PUT',
             headers: { 'x-access-token': Authentication.getToken(),
                         'user-id': Authentication.getId()}

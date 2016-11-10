@@ -47,8 +47,8 @@ angular.module('paypalCtrl',[])
             "X-PAYPAL-RESPONSE-DATA-FORMAT":"JSON"
             },
             data: {              
-              "returnUrl":"http://localhost:3000/#/home",
-              "cancelUrl":"http://localhost:3000/#/home",  
+              "returnUrl":"https://imse4119project.herokuapp.com/#/confirm",
+              "cancelUrl":"https://imse4119project.herokuapp.com/#/reject",  
               "requestEnvelope":{
                   "errorLanguage":"en_US",                          
                   "detailLevel":"ReturnAll"                        
@@ -155,7 +155,7 @@ angular.module('paypalCtrl',[])
           console.log(JSON.stringify(data));
         },
         function(){
-          console.log("Fil to created payment due to unexpected error.")
+          console.log("Fail to created payment due to unexpected error.")
         });
         }
     }

@@ -86,7 +86,7 @@ router.get('/register', function(req,res,next){
 });
 
 router.post('/register',function(req,res){
-    User.register(new User({ username: req.body.username }), req.body.password, function(err, user){
+    User.register(new User({ username: req.body.username, email:req.body.email }), req.body.password, function(err, user){
         if(err){return res.send(err)};
         passport.authenticate('local')(req,res, function(){
             res.send('Register successfully');
