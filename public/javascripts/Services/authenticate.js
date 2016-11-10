@@ -90,7 +90,7 @@ angular.module('authenticate',[])
         getAdmin: getAdmin,
         getPic: getPic
     }
-}])
+}]);
 
 /*
 .factory('isUsernameAvailable', function($q, $http) {

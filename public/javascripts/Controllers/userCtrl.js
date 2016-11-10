@@ -74,8 +74,8 @@ angular.module('userCtrl',[])
     }
 
 
-}])
-
+}]);
+/*
 .directive('uniqueUsername', function(isUsernameAvailable) {
   return {
     restrict: 'A',
