@@ -1,8 +1,12 @@
 angular.module('projectService',[])
 
-.factory('Project',['$resource','Authentication', function($resource,Authentication){
-    //var url = "http://localhost:3000/projects/:id";
-    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/projects/:id";
+.factory('Project',['$resource','Authentication', function($resource,Authentication){"https://imse4119project.herokuapp.com"
+    var baseurl = "https://imse4119project.herokuapp.com";
+    //var baseurl = "http://localhost:3000";
+
+    //var url = baseurl + "/prjects/:id";
+    var url = baseurl + "/projects/:id";
+
     return $resource(url,{ id: '@_id' },{
         update: {
             method: 'PUT',
@@ -18,19 +22,19 @@ angular.module('projectService',[])
             headers: { 'x-access-token': Authentication.getToken() }
         },
         approve: {
-            url: "http://localhost:3000/projects/:id/admin",
+            url: baseurl + "/projects/:id/admin",
             method: 'PUT',
             headers: { 'x-access-token': Authentication.getToken() }
         },
         support: {
-            url: "http://localhost:3000/projects/:id/backer",
+            url: baseurl + "/projects/:id/backer",
             method: 'PUT',
             headers: { 'x-access-token': Authentication.getToken() ,
                         'user-id': Authentication.getId()
                      }
         },
         comment: {
-            url: "http://localhost:3000/projects/:id/comment",
+            url: baseurl + "/projects/:id/comment",
             method: 'PUT',
             headers: { 'x-access-token': Authentication.getToken()}
         },

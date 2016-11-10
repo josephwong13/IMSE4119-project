@@ -1,8 +1,13 @@
 angular.module('userService',[])
 
 .factory('User',['$resource','Authentication', function($resource,Authentication){
-    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/users/:id";
-    //var url = "http://localhost:3000/users/:id";
+
+    var baseurl = "https://imse4119project.herokuapp.com";
+    //var baseurl = "http://localhost:3000";
+
+    var url = baseurl + "/users/:id";
+    //var url = baseurl + "/users/:id";
+
     return $resource(url,{ id: '@_id' },{
         query: {
             method: 'GET',
@@ -23,7 +28,7 @@ angular.module('userService',[])
             headers: { 'x-access-token': Authentication.getToken() }
         },
         userupdate: {
-            url: "http://localhost:3000/users/userupdate/:id",
+            url: baseurl + "/userupdate/:id",
             method: 'PUT',
             headers: { 'x-access-token': Authentication.getToken(),
                         'user-id': Authentication.getId()}

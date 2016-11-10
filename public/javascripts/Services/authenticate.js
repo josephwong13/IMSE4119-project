@@ -2,7 +2,7 @@ angular.module('authenticate',[])
 
 .factory('Authentication',['$window','$http', function($window, $http){
 
-    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/users";
+    var url = "https://imse4119project.herokuapp.com/users";
     //var url = "http://localhost:3000/users";
 
     function saveToken(token, _id, username,admin,pic){
@@ -94,7 +94,7 @@ angular.module('authenticate',[])
 .factory('isUsernameAvailable', function($q, $http) {
   return function(username) {
     var deferred = $q.defer();
-    var url = "http://localhost:3000/users";
+    var url = url;
 
     $http.get(url + '/username/' + username).then(function(data) {
         if(data.data==null){
