@@ -56,6 +56,7 @@ angular.module('authenticate',[])
             },
             function(err){
                 console.log('Fail to register user');
+                $window.alert("Username has been taken.")
             })
     }
 
@@ -91,6 +92,7 @@ angular.module('authenticate',[])
     }
 }])
 
+/*
 .factory('isUsernameAvailable', function($q, $http) {
   return function(username) {
     var deferred = $q.defer();
