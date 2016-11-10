@@ -1,7 +1,8 @@
 angular.module('userService',[])
 
 .factory('User',['$resource','Authentication', function($resource,Authentication){
-    var url = "http://localhost:3000/users/:id";
+    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/users/:id";
+    //var url = "http://localhost:3000/users/:id";
     return $resource(url,{ id: '@_id' },{
         query: {
             method: 'GET',

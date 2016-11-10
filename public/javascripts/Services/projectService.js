@@ -1,7 +1,8 @@
 angular.module('projectService',[])
 
 .factory('Project',['$resource','Authentication', function($resource,Authentication){
-    var url = "http://localhost:3000/projects/:id";
+    //var url = "http://localhost:3000/projects/:id";
+    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/projects/:id";
     return $resource(url,{ id: '@_id' },{
         update: {
             method: 'PUT',

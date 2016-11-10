@@ -2,7 +2,8 @@ angular.module('authenticate',[])
 
 .factory('Authentication',['$window','$http', function($window, $http){
 
-    var url = "http://localhost:3000/users";
+    var url = "mongodb://admin:1234@ds149577.mlab.com:49577/heroku_13mrtrxj/users";
+    //var url = "http://localhost:3000/users";
 
     function saveToken(token, _id, username,admin,pic){
         $window.localStorage['mytoken'] = token;
