@@ -35,7 +35,7 @@
                             Delete
                         </md-button>
                         <div flex></div>
-                        <md-button class="md-raised md-primary" ng-click="approvePayment(n)" ng-disabled="{{n.currentFund<=n.goalFund}}">
+                        <md-button class="md-raised md-primary" ng-click="approvePayment(n)" ng-disabled="{{n.currentFund<n.goalFund}}">
                             Payment
                         </md-button>
                     </div>
