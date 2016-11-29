@@ -214,6 +214,7 @@ angular.module('paypalCtrl',[])
           console.log(JSON.stringify(data));
             Project.approve({id:project._id},{"status":"completed"},
             function(){
+                window.alert("Transaction successful!");
                 console.log("Project completed");
             },
             function(){
